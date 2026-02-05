@@ -1,24 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   cub_parse.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: apestana <apestana@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/02/05 11:24:16 by apestana          #+#    #+#             */
-/*   Updated: 2026/02/05 11:57:26 by apestana         ###   ########.fr       */
+/*   Created: 2026/02/05 11:55:13 by apestana          #+#    #+#             */
+/*   Updated: 2026/02/05 11:55:50 by apestana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int	main(int argc, char **argv)
+int	cub_parse_file(t_scene *sc, const char *path)
 {
-	t_scene	sc;
-
-	(void)argc;
-	(void)argv;
-	cub_scene_init(&sc);
-	cub_scene_free(&sc);
+	(void)sc;
+	(void)path;
 	return (0);
 }

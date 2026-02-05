@@ -6,12 +6,12 @@
 #    By: apestana <apestana@student.42malaga.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/02/05 11:05:33 by apestana          #+#    #+#              #
-#    Updated: 2026/02/05 11:36:16 by apestana         ###   ########.fr        #
+#    Updated: 2026/02/05 12:05:59 by apestana         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 ##### Name #################################
-NAME 		= cube3D
+NAME 		= cub3D
 
 ##### Compiler && Flags ####################
 CC 		= cc
@@ -31,7 +31,7 @@ GNL			= $(GNL_DIR)/getnextline.a
 LIBS		= $(LIBFT) $(GNL)
 
 ##### Sources, objects and deps ############
-SRC			= main.c
+SRC			= main.c cub_scene.c cub_parse.c utils_free.c
 SRCS		= $(addprefix $(SRCDIR)/,$(SRC))
 OBJS		= $(addprefix $(OBJDIR)/,$(SRC:.c=.o))
 DEPS		= $(OBJS:.o=.d)
@@ -47,7 +47,11 @@ $(OBJDIR):
 	mkdir -p $(OBJDIR)
 
 $(OBJDIR)/%.o: $(SRCDIR)/%.c | $(OBJDIR)
-	$(CC) $(CFLAGS) $(CPPFLAGS) -I$(INCDIR) -c $< -o $@
+	$(CC) $(CFLAGS) $(CPPFLAGS) \
+		-I$(INCDIR) \
+		-I$(LIBFT_DIR)/inc \
+		-I$(GNL_DIR) \
+		-c $< -o $@
 
 ##### Libft ################################
 $(LIBFT):

@@ -1,24 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   utils_free.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: apestana <apestana@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/02/05 11:24:16 by apestana          #+#    #+#             */
-/*   Updated: 2026/02/05 11:57:26 by apestana         ###   ########.fr       */
+/*   Created: 2026/02/05 12:05:34 by apestana          #+#    #+#             */
+/*   Updated: 2026/02/05 12:06:17 by apestana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int	main(int argc, char **argv)
+void	ft_free_split(char **split)
 {
-	t_scene	sc;
+	int	i;
 
-	(void)argc;
-	(void)argv;
-	cub_scene_init(&sc);
-	cub_scene_free(&sc);
-	return (0);
+	if (!split)
+		return ;
+	i = 0;
+	while (split[i])
+	{
+		free(split[i]);
+		i++;
+	}
+	free(split);
 }
