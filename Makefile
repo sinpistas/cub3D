@@ -6,7 +6,7 @@
 #    By: apestana <apestana@student.42malaga.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/02/05 11:05:33 by apestana          #+#    #+#              #
-#    Updated: 2026/02/05 12:05:59 by apestana         ###   ########.fr        #
+#    Updated: 2026/02/05 12:57:54 by apestana         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,11 +30,23 @@ LIBFT		= $(LIBFT_DIR)/libft.a
 GNL			= $(GNL_DIR)/getnextline.a
 LIBS		= $(LIBFT) $(GNL)
 
-##### Sources, objects and deps ############
-SRC			= main.c cub_scene.c cub_parse.c utils_free.c
+##### Sources ##############################
+SRC			= main.c \
+			  scene/cub_scene.c \
+			  parse/cub_parse.c parse/cub_parse_line.c parse/cub_parse_stub.c\
+			  utils/utils_free.c
 SRCS		= $(addprefix $(SRCDIR)/,$(SRC))
-OBJS		= $(addprefix $(OBJDIR)/,$(SRC:.c=.o))
+
+##### Objects / deps (flatten in obj/) #####
+OBJ_NAMES	= $(notdir $(SRC:.c=.o))
+OBJS		= $(addprefix $(OBJDIR)/,$(OBJ_NAMES))
 DEPS		= $(OBJS:.o=.d)
+
+##### Include paths ########################
+INCLUDES	= -I$(INCDIR) -I$(LIBFT_DIR)/inc -I$(GNL_DIR)
+
+##### Where to find %.c ####################
+vpath %.c $(SRCDIR) $(SRCDIR)/scene $(SRCDIR)/parse $(SRCDIR)/utils
 
 ##### Rules ################################
 all : $(NAME)
@@ -46,12 +58,8 @@ $(NAME): $(LIBS) $(OBJS)
 $(OBJDIR):
 	mkdir -p $(OBJDIR)
 
-$(OBJDIR)/%.o: $(SRCDIR)/%.c | $(OBJDIR)
-	$(CC) $(CFLAGS) $(CPPFLAGS) \
-		-I$(INCDIR) \
-		-I$(LIBFT_DIR)/inc \
-		-I$(GNL_DIR) \
-		-c $< -o $@
+$(OBJDIR)/%.o: %.c | $(OBJDIR)
+	$(CC) $(CFLAGS) $(CPPFLAGS) $(INCLUDES) -c $< -o $@
 
 ##### Libft ################################
 $(LIBFT):
@@ -75,6 +83,6 @@ fclean: clean
 re: fclean all
 
 ##### Deps #############################
--include $(DEP)
+-include $(DEPS)
 
 .PHONY: all clean fclean re

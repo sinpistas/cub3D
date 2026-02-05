@@ -1,20 +1,45 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub_parse.c                                        :+:      :+:    :+:   */
+/*   cub_parse_stub.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: apestana <apestana@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/02/05 11:55:13 by apestana          #+#    #+#             */
-/*   Updated: 2026/02/05 11:55:50 by apestana         ###   ########.fr       */
+/*   Created: 2026/02/05 12:57:17 by apestana          #+#    #+#             */
+/*   Updated: 2026/02/05 12:59:37 by apestana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int	cub_parse_file(t_scene *sc, const char *path)
+int	cub_check_extension(const char *path)
+{
+	(void)path;
+	return (0);
+}
+
+int	cub_parse_id_line(t_scene *sc, char *line)
 {
 	(void)sc;
-	(void)path;
+	(void)line;
+	return (0);
+}
+
+int	cub_map_push_line(t_scene *sc, char *line)
+{
+	(void)sc;
+	(void)line;
+	return (0);
+}
+
+int	cub_finalize_map(t_scene *sc)
+{
+	(void)sc;
+	return (0);
+}
+
+int	cub_validate_scene(t_scene *sc)
+{
+	(void)sc;
 	return (0);
 }

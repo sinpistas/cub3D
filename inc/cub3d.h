@@ -6,7 +6,7 @@
 /*   By: apestana <apestana@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/05 11:44:05 by apestana          #+#    #+#             */
-/*   Updated: 2026/02/05 12:05:19 by apestana         ###   ########.fr       */
+/*   Updated: 2026/02/05 12:56:26 by apestana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,10 @@
 /* system */
 # include <stdio.h>
 # include <math.h>
+# include <sys/types.h>
+# include <sys/stat.h>
+# include <fcntl.h>
+# include <stdbool.h>
 
 /* ------- constants ----------*/
 # define CUB_EXT ".cub"
@@ -39,20 +43,38 @@ typedef struct s_tex
 	char	*ea;
 }	t_tex;
 
+typedef struct s_player
+{
+	int		x;
+	int		y;
+	char	dir;
+}	t_player;
+
 typedef struct s_scene
 {
-	t_tex	textures;
-	t_rgb	floor;
-	t_rgb	ceiling;
-	char	**map;
-	int		map_h;
-	int		map_w;
+	t_tex		textures;
+	t_rgb		floor;
+	t_rgb		ceiling;
+	char		**map;
+	int			map_h;
+	int			map_w;
+	t_player	player;
+	bool		has_floor;
+	bool		has_ceiling;
+	bool		has_player;
 }	t_scene;
 
 /* ------- parsing ---------- */
 int		cub_parse_file(t_scene *sc, const char *path);
 void	cub_scene_init(t_scene *sc);
 void	cub_scene_free(t_scene *sc);
+/* ------- helpers parsing ---*/
+int		cub_process_line(t_scene *sc, char *line, int *in_map);
+int		cub_check_extension(const char *path);
+int		cub_parse_id_line(t_scene *sc, char *line);
+int		cub_map_push_line(t_scene *sc, char *line);
+int		cub_finalize_map(t_scene *sc);
+int		cub_validate_scene(t_scene *sc);
 
 /* ------- aux ----------------*/
 void	ft_free_split(char **split);
