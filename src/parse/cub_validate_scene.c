@@ -6,7 +6,7 @@
 /*   By: apestana <apestana@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/05 12:57:17 by apestana          #+#    #+#             */
-/*   Updated: 2026/02/07 18:26:37 by apestana         ###   ########.fr       */
+/*   Updated: 2026/02/07 19:39:51 by apestana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ int	cub_validate_scene(t_scene *sc)
 	if (!sc->map || sc->map_h <= 0 || sc->map_w <= 0)
 		return (1);
 	if (cub_validate_map(sc) != 0)
+		return (1);
+	if (!sc->has_floor || !sc->has_ceiling)
 		return (1);
 	return (0);
 }

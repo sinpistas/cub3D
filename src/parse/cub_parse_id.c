@@ -6,16 +6,23 @@
 /*   By: apestana <apestana@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/07 16:48:39 by apestana          #+#    #+#             */
-/*   Updated: 2026/02/07 16:51:09 by apestana         ###   ########.fr       */
+/*   Updated: 2026/02/07 19:57:25 by apestana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
 static int	cub_set_texture(char **dst, char *path);
-static char	*cub_skip_spaces(char *s);
 static int	cub_parse_texture_line(t_scene *sc, char *line);
 
+/*
+** Parse a non-map identifier line.
+**
+** Handles texture and color identifiers and
+** rejects unknown or malformed identifiers.
+**
+** Returns 0 on success, 1 on error.
+*/
 int	cub_parse_id_line(t_scene *sc, char *line)
 {
 	line = cub_skip_spaces(line);
@@ -31,9 +38,51 @@ int	cub_parse_id_line(t_scene *sc, char *line)
 	if (line[0] == 'E' && line[1] == 'A'
 		&& (line[2] == ' ' || line[2] == '\t'))
 		return (cub_parse_texture_line(sc, line));
-	return (0);
+	if (line[0] == 'F' && (line[1] == ' ' || line[1] == '\t'))
+		return (cub_parse_color_line(sc, 'F', line));
+	if (line[0] == 'C' && (line[1] == ' ' || line[1] == '\t'))
+		return (cub_parse_color_line(sc, 'C', line));
+	return (1);
 }
 
+/*
+** Skip leading spaces and tabs in a string.
+**
+** Returns a pointer to the first non-space character.
+*/
+char	*cub_skip_spaces(char *s)
+{
+	while (*s == ' ' || *s == '\t')
+		s++;
+	return (s);
+}
+
+/*
+** Duplicate an identifier argument without trailing newline.
+**
+** Trims leading spaces and removes a final '\n' if present.
+**
+** Returns a newly allocated string or NULL on error.
+*/
+char	*cub_dup_arg_no_nl(char *s)
+{
+	size_t	len;
+
+	s = cub_skip_spaces(s);
+	len = ft_strlen(s);
+	if (len > 0 && s[len - 1] == '\n')
+		len--;
+	return (ft_substr(s, 0, len));
+}
+
+/*
+** Assign a texture path to a scene texture slot.
+**
+** Prevents duplicate definitions and duplicates
+** the path string.
+**
+** Returns 0 on success, 1 on error.
+*/
 static int	cub_set_texture(char **dst, char *path)
 {
 	if (*dst != NULL)
@@ -46,31 +95,30 @@ static int	cub_set_texture(char **dst, char *path)
 	return (0);
 }
 
-static char	*cub_skip_spaces(char *s)
-{
-	while (*s == ' ' || *s == '\t')
-		s++;
-	return (s);
-}
-
+/*
+** Parse a texture identifier line.
+**
+** Extracts the texture path and assigns it to the
+** corresponding texture slot.
+**
+** Returns 0 on success, 1 on error.
+*/
 static int	cub_parse_texture_line(t_scene *sc, char *line)
 {
-	char	*path;
+	char	*arg;
+	int		ret;
 
-	path = cub_skip_spaces(line + 2);
-	if (*path == '\0')
+	arg = cub_dup_arg_no_nl(line + 2);
+	if (!arg)
 		return (1);
-	if (*path == '\n')
-		return (1);
-	if (path[ft_strlen(path) - 1] == '\n')
-		path[ft_strlen(path) - 1] = '\0';
 	if (line[0] == 'N' && line[1] == 'O')
-		return (cub_set_texture(&sc->textures.no, path));
-	if (line[0] == 'S' && line[1] == 'O')
-		return (cub_set_texture(&sc->textures.so, path));
-	if (line[0] == 'W' && line[1] == 'E')
-		return (cub_set_texture(&sc->textures.we, path));
-	if (line[0] == 'E' && line[1] == 'A')
-		return (cub_set_texture(&sc->textures.ea, path));
-	return (1);
+		ret = cub_set_texture(&sc->textures.no, arg);
+	else if (line[0] == 'S' && line[1] == 'O')
+		ret = cub_set_texture(&sc->textures.so, arg);
+	else if (line[0] == 'W' && line[1] == 'E')
+		ret = cub_set_texture(&sc->textures.we, arg);
+	else
+		ret = cub_set_texture(&sc->textures.ea, arg);
+	free(arg);
+	return (ret);
 }

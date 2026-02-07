@@ -6,7 +6,7 @@
 /*   By: apestana <apestana@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/05 11:44:05 by apestana          #+#    #+#             */
-/*   Updated: 2026/02/07 18:20:27 by apestana         ###   ########.fr       */
+/*   Updated: 2026/02/07 19:57:33 by apestana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,11 +82,15 @@ void	cub_scene_free(t_scene *sc);
 int		cub_process_line(t_scene *sc, char *line, int *in_map);
 int		cub_check_extension(const char *path);
 int		cub_parse_id_line(t_scene *sc, char *line);
+int		cub_parse_color_line(t_scene *sc, char id, char *line);
+int		cub_parse_rgb(char *line, t_rgb *rgb);
 int		cub_map_push_line(t_scene *sc, char *line);
 int		cub_finalize_map(t_scene *sc);
 int		cub_validate_scene(t_scene *sc);
 int		cub_validate_map(t_scene *sc);
 int		cub_validate_cell(t_scene *sc, int y, int x);
+char	*cub_skip_spaces(char *s);
+char	*cub_dup_arg_no_nl(char *s);
 
 /* ------- aux ----------------*/
 void	ft_free_split(char **split);
