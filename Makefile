@@ -6,7 +6,7 @@
 #    By: apestana <apestana@student.42malaga.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/02/05 11:05:33 by apestana          #+#    #+#              #
-#    Updated: 2026/02/05 12:57:54 by apestana         ###   ########.fr        #
+#    Updated: 2026/02/07 16:36:23 by apestana         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,6 +34,7 @@ LIBS		= $(LIBFT) $(GNL)
 SRC			= main.c \
 			  scene/cub_scene.c \
 			  parse/cub_parse.c parse/cub_parse_line.c parse/cub_parse_stub.c\
+			  parse/cub_check_extension.c\
 			  utils/utils_free.c
 SRCS		= $(addprefix $(SRCDIR)/,$(SRC))
 

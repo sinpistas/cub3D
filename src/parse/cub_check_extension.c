@@ -1,39 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub_parse_stub.c                                   :+:      :+:    :+:   */
+/*   cub_check_extension.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: apestana <apestana@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/02/05 12:57:17 by apestana          #+#    #+#             */
-/*   Updated: 2026/02/07 16:36:27 by apestana         ###   ########.fr       */
+/*   Created: 2026/02/07 16:33:38 by apestana          #+#    #+#             */
+/*   Updated: 2026/02/07 16:36:40 by apestana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int	cub_parse_id_line(t_scene *sc, char *line)
+int	cub_check_extension(const char *path)
 {
-	(void)sc;
-	(void)line;
-	return (0);
-}
+	int	len;
 
-int	cub_map_push_line(t_scene *sc, char *line)
-{
-	(void)sc;
-	(void)line;
-	return (0);
-}
-
-int	cub_finalize_map(t_scene *sc)
-{
-	(void)sc;
-	return (0);
-}
-
-int	cub_validate_scene(t_scene *sc)
-{
-	(void)sc;
+	if (!path)
+		return (1);
+	len = ft_strlen(path);
+	if (len < 5)
+		return (1);
+	if (path[len - 4] != '.'
+		|| path[len - 3] != 'c'
+		|| path[len - 2] != 'u'
+		|| path[len - 1] != 'b')
+		return (1);
 	return (0);
 }
