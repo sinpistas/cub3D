@@ -6,18 +6,11 @@
 /*   By: apestana <apestana@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/05 12:57:17 by apestana          #+#    #+#             */
-/*   Updated: 2026/02/07 16:36:27 by apestana         ###   ########.fr       */
+/*   Updated: 2026/02/07 16:49:25 by apestana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-int	cub_parse_id_line(t_scene *sc, char *line)
-{
-	(void)sc;
-	(void)line;
-	return (0);
-}
 
 int	cub_map_push_line(t_scene *sc, char *line)
 {
