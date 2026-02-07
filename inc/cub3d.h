@@ -6,7 +6,7 @@
 /*   By: apestana <apestana@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/05 11:44:05 by apestana          #+#    #+#             */
-/*   Updated: 2026/02/07 17:12:20 by apestana         ###   ########.fr       */
+/*   Updated: 2026/02/07 17:25:36 by apestana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,13 @@ typedef struct s_player
 	char	dir;
 }	t_player;
 
+/*For parsing use only*/
+typedef struct s_mline
+{
+	char			*line;
+	struct s_mline	*next;
+}	t_mline;
+
 typedef struct s_scene
 {
 	t_tex		textures;
@@ -63,6 +70,8 @@ typedef struct s_scene
 	bool		has_floor;
 	bool		has_ceiling;
 	bool		has_player;
+	t_mline		*map_lines;
+	t_mline		*map_last;
 }	t_scene;
 
 /* ------- parsing ---------- */
@@ -79,5 +88,6 @@ int		cub_validate_scene(t_scene *sc);
 
 /* ------- aux ----------------*/
 void	ft_free_split(char **split);
+void	cub_free_map_lines(t_mline *lst);
 
 #endif

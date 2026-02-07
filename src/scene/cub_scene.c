@@ -6,7 +6,7 @@
 /*   By: apestana <apestana@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/05 11:53:37 by apestana          #+#    #+#             */
-/*   Updated: 2026/02/05 12:18:56 by apestana         ###   ########.fr       */
+/*   Updated: 2026/02/07 17:26:51 by apestana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@ void	cub_scene_init(t_scene *sc)
 	sc->has_floor = false;
 	sc->has_ceiling = false;
 	sc->has_player = false;
+	sc->map_lines = NULL;
+	sc->map_last = NULL;
 }
 
 void	cub_scene_free(t_scene *sc)
@@ -46,5 +48,8 @@ void	cub_scene_free(t_scene *sc)
 	free(sc->textures.we);
 	free(sc->textures.ea);
 	ft_free_split(sc->map);
+	cub_free_map_lines(sc->map_lines);
+	sc->map_lines = NULL;
+	sc->map_last = NULL;
 	cub_scene_init(sc);
 }
