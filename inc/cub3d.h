@@ -6,7 +6,7 @@
 /*   By: apestana <apestana@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/05 11:44:05 by apestana          #+#    #+#             */
-/*   Updated: 2026/02/05 12:56:26 by apestana         ###   ########.fr       */
+/*   Updated: 2026/02/07 17:12:20 by apestana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
 # include <sys/stat.h>
 # include <fcntl.h>
 # include <stdbool.h>
+# include <stdlib.h>
 
 /* ------- constants ----------*/
 # define CUB_EXT ".cub"
