@@ -6,7 +6,7 @@
 #    By: apestana <apestana@student.42malaga.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/02/05 11:05:33 by apestana          #+#    #+#              #
-#    Updated: 2026/02/07 17:15:10 by apestana         ###   ########.fr        #
+#    Updated: 2026/02/07 17:41:18 by apestana         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,6 +35,7 @@ SRC			= main.c \
 			  scene/cub_scene.c \
 			  parse/cub_parse.c parse/cub_parse_line.c parse/cub_parse_stub.c\
 			  parse/cub_check_extension.c parse/cub_parse_id.c parse/cub_map_push.c\
+			  parse/cub_finalize_map.c\
 			  utils/utils_free.c
 SRCS		= $(addprefix $(SRCDIR)/,$(SRC))
 
