@@ -6,7 +6,7 @@
 /*   By: apestana <apestana@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/05 11:44:05 by apestana          #+#    #+#             */
-/*   Updated: 2026/02/07 17:25:36 by apestana         ###   ########.fr       */
+/*   Updated: 2026/02/07 18:20:27 by apestana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ typedef struct s_player
 	char	dir;
 }	t_player;
 
-/*For parsing use only*/
+/* Parser's use only */
 typedef struct s_mline
 {
 	char			*line;
@@ -85,6 +85,8 @@ int		cub_parse_id_line(t_scene *sc, char *line);
 int		cub_map_push_line(t_scene *sc, char *line);
 int		cub_finalize_map(t_scene *sc);
 int		cub_validate_scene(t_scene *sc);
+int		cub_validate_map(t_scene *sc);
+int		cub_validate_cell(t_scene *sc, int y, int x);
 
 /* ------- aux ----------------*/
 void	ft_free_split(char **split);
