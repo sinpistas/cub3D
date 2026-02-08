@@ -6,7 +6,7 @@
 /*   By: apestana <apestana@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/05 12:31:45 by apestana          #+#    #+#             */
-/*   Updated: 2026/02/05 12:54:33 by apestana         ###   ########.fr       */
+/*   Updated: 2026/02/08 13:06:25 by apestana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,14 @@
 static int	cub_is_blank(char *line);
 static int	cub_is_map_line(char *line);
 
+/*
+** Process one line from the .cub file.
+**
+** Dispatches the line to identifiers parsing or map storage,
+** tracking when the map section starts.
+**
+** Returns 0 on success, 1 on error.
+*/
 int	cub_process_line(t_scene *sc, char *line, int *in_map)
 {
 	if (!*in_map && cub_is_blank(line))
@@ -26,6 +34,11 @@ int	cub_process_line(t_scene *sc, char *line, int *in_map)
 	return (cub_map_push_line(sc, line));
 }
 
+/*
+** Check if a line is empty or contains only whitespace.
+**
+** Returns 1 if blank, 0 otherwise.
+*/
 static int	cub_is_blank(char *line)
 {
 	int	i;
@@ -41,6 +54,12 @@ static int	cub_is_blank(char *line)
 	return (1);
 }
 
+/*
+** Check if a line can belong to the map section.
+**
+** Typically accepts lines containing only map characters and spaces.
+** Returns 1 if it looks like a map line, 0 otherwise.
+*/
 static int	cub_is_map_line(char *line)
 {
 	int	i;

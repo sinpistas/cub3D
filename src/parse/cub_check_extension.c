@@ -6,12 +6,17 @@
 /*   By: apestana <apestana@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/07 16:33:38 by apestana          #+#    #+#             */
-/*   Updated: 2026/02/07 16:36:40 by apestana         ###   ########.fr       */
+/*   Updated: 2026/02/08 13:05:42 by apestana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
+/*
+** Check that the given path has the expected ".cub" extension.
+**
+** Returns 0 if valid, 1 on error.
+*/
 int	cub_check_extension(const char *path)
 {
 	int	len;

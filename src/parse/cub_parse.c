@@ -6,7 +6,7 @@
 /*   By: apestana <apestana@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/05 11:55:13 by apestana          #+#    #+#             */
-/*   Updated: 2026/02/05 12:54:17 by apestana         ###   ########.fr       */
+/*   Updated: 2026/02/08 13:07:14 by apestana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,14 @@ static int	cub_close_fd(int fd, int ret);
 static int	cub_read_lines(t_scene *sc, int fd);
 static int	cub_after_read(t_scene *sc);
 
+/*
+** Parse a .cub file into the scene structure.
+**
+** Opens the file, reads and processes all lines, then finalizes and
+** validates the scene.
+**
+** Returns 0 on success, 1 on error.
+*/
 int	cub_parse_file(t_scene *sc, const char *path)
 {
 	int	fd;
@@ -31,12 +39,24 @@ int	cub_parse_file(t_scene *sc, const char *path)
 	return (cub_after_read(sc));
 }
 
+/*
+** Close a file descriptor and return the provided status code.
+**
+** Used to centralize close() calls on success or error paths.
+*/
 static int	cub_close_fd(int fd, int ret)
 {
 	close(fd);
 	return (ret);
 }
 
+/*
+** Read and process all lines from the opened .cub file.
+**
+** Calls cub_process_line for each line and stops on the first error.
+**
+** Returns 0 on success, 1 on error.
+*/
 static int	cub_read_lines(t_scene *sc, int fd)
 {
 	char	*line;
@@ -59,6 +79,12 @@ static int	cub_read_lines(t_scene *sc, int fd)
 	return (0);
 }
 
+/*
+** Run post-read steps after all lines have been processed.
+**
+** Builds the final map, then validates the full scene.
+** Returns 0 on success, 1 on error.
+*/
 static int	cub_after_read(t_scene *sc)
 {
 	if (cub_finalize_map(sc) != 0)
