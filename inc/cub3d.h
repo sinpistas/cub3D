@@ -6,7 +6,7 @@
 /*   By: apestana <apestana@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/05 11:44:05 by apestana          #+#    #+#             */
-/*   Updated: 2026/02/07 19:57:33 by apestana         ###   ########.fr       */
+/*   Updated: 2026/02/08 12:40:36 by apestana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,8 @@ char	*cub_skip_spaces(char *s);
 char	*cub_dup_arg_no_nl(char *s);
 
 /* ------- aux ----------------*/
-void	ft_free_split(char **split);
 void	cub_free_map_lines(t_mline *lst);
+void	cub_xfree(void **p);
+void	cub_free_strv(char ***p);
 
 #endif

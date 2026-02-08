@@ -6,7 +6,7 @@
 /*   By: apestana <apestana@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/07 17:40:29 by apestana          #+#    #+#             */
-/*   Updated: 2026/02/07 18:03:20 by apestana         ###   ########.fr       */
+/*   Updated: 2026/02/08 12:38:11 by apestana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,35 +14,23 @@
 
 static int	cub_compute_map_width(t_mline *lst);
 static char	*cub_build_map_row(char *src, int width);
+static int	cub_fill_map_from_lines(t_scene *sc);
 
 /*
 ** Build the final rectangular map from stored map lines.
-**
 ** Computes dimensions, fills missing spaces and frees
 ** the temporary list.
 */
 int	cub_finalize_map(t_scene *sc)
 {
-	t_mline	*lst;
-	int		i;
-
-	if (!sc->map_lines || sc->map_h == 0)
+	if (!sc->map_lines || sc->map_h <= 0)
 		return (1);
 	sc->map_w = cub_compute_map_width(sc->map_lines);
 	sc->map = (char **)malloc(sizeof(char *) * (sc->map_h + 1));
 	if (!sc->map)
 		return (1);
-	lst = sc->map_lines;
-	i = 0;
-	while (lst)
-	{
-		sc->map[i] = cub_build_map_row(lst->line, sc->map_w);
-		if (!sc->map[i])
-			return (1);
-		lst = lst->next;
-		i++;
-	}
-	sc->map[i] = NULL;
+	if (cub_fill_map_from_lines(sc) != 0)
+		return (1);
 	cub_free_map_lines(sc->map_lines);
 	sc->map_lines = NULL;
 	sc->map_last = NULL;
@@ -51,7 +39,6 @@ int	cub_finalize_map(t_scene *sc)
 
 /*
 ** Compute the maximum width of the map.
-**
 ** Iterates through all stored map lines and returns
 ** the length of the longest one.
 */
@@ -73,7 +60,6 @@ static int	cub_compute_map_width(t_mline *lst)
 
 /*
 ** Build one rectangular map row.
-**
 ** Copies the original line and fills the remaining
 ** cells with spaces to match the map width.
 */
@@ -98,4 +84,29 @@ static char	*cub_build_map_row(char *src, int width)
 	}
 	row[i] = '\0';
 	return (row);
+}
+
+/*
+** Fill the final map array from the temporary map lines list.
+** Allocates each row and keeps the map NULL-terminated during filling.
+** Returns 0 on success, 1 on error.
+*/
+static int	cub_fill_map_from_lines(t_scene *sc)
+{
+	t_mline	*lst;
+	int		i;
+
+	lst = sc->map_lines;
+	i = 0;
+	sc->map[0] = NULL;
+	while (lst)
+	{
+		sc->map[i] = cub_build_map_row(lst->line, sc->map_w);
+		if (!sc->map[i])
+			return (1);
+		sc->map[i + 1] = NULL;
+		lst = lst->next;
+		i++;
+	}
+	return (0);
 }

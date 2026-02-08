@@ -6,12 +6,17 @@
 /*   By: apestana <apestana@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/05 11:53:37 by apestana          #+#    #+#             */
-/*   Updated: 2026/02/07 17:26:51 by apestana         ###   ########.fr       */
+/*   Updated: 2026/02/08 12:42:31 by apestana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
+/*
+** Initialize the scene structure to a clean state.
+**
+** Sets all fields to zero/NULL so cleanup is always safe.
+*/
 void	cub_scene_init(t_scene *sc)
 {
 	if (!sc)
@@ -39,15 +44,21 @@ void	cub_scene_init(t_scene *sc)
 	sc->map_last = NULL;
 }
 
+/*
+** Release all resources owned by the scene.
+**
+** Frees textures, map data and temporary parsing structures,
+** then resets the scene to an initialized state.
+*/
 void	cub_scene_free(t_scene *sc)
 {
 	if (!sc)
 		return ;
-	free(sc->textures.no);
-	free(sc->textures.so);
-	free(sc->textures.we);
-	free(sc->textures.ea);
-	ft_free_split(sc->map);
+	cub_xfree((void **)&sc->textures.no);
+	cub_xfree((void **)&sc->textures.so);
+	cub_xfree((void **)&sc->textures.we);
+	cub_xfree((void **)&sc->textures.ea);
+	cub_free_strv(&sc->map);
 	cub_free_map_lines(sc->map_lines);
 	sc->map_lines = NULL;
 	sc->map_last = NULL;
