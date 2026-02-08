@@ -26,9 +26,11 @@ INCDIR		= inc
 ##### Libraries ############################
 LIBFT_DIR	= lib/libft
 GNL_DIR		= lib/getnextline
+MLX_DIR		= lib/minilibx-linux
 LIBFT		= $(LIBFT_DIR)/libft.a
 GNL			= $(GNL_DIR)/getnextline.a
-LIBS		= $(LIBFT) $(GNL)
+MLX			= $(MLX_DIR)/libmlx.a
+LIBS		= $(LIBFT) $(GNL) $(MLX)
 
 ##### Sources ##############################
 SRC			= main.c \
@@ -36,7 +38,10 @@ SRC			= main.c \
 			  parse/cub_parse.c parse/cub_parse_line.c parse/cub_validate_scene.c \
 			  parse/cub_check_extension.c parse/cub_parse_id.c parse/cub_map_push.c \
 			  parse/cub_finalize_map.c parse/cub_validate_map.c parse/cub_validate_map_cell.c \
-			  parse/cub_parse_color.c parse/cub_parse_color_line.c\
+			  parse/cub_parse_color.c parse/cub_parse_color_line.c \
+			  game/game_init.c game/load_textures.c game/render.c game/camera.c \
+			  game/raycast.c game/raycast_utils.c game/raycast_draw.c \
+			  game/events.c game/events_update.c game/movement.c game/rotation.c \
 			  utils/utils_free.c
 SRCS		= $(addprefix $(SRCDIR)/,$(SRC))
 
@@ -46,42 +51,60 @@ OBJS		= $(addprefix $(OBJDIR)/,$(OBJ_NAMES))
 DEPS		= $(OBJS:.o=.d)
 
 ##### Include paths ########################
-INCLUDES	= -I$(INCDIR) -I$(LIBFT_DIR)/inc -I$(GNL_DIR)
+INCLUDES	= -I$(INCDIR) -I$(LIBFT_DIR)/inc -I$(GNL_DIR) -I$(MLX_DIR)
+
+##### Linker flags #########################
+LDFLAGS		= -L$(MLX_DIR) -lmlx -lXext -lX11 -lm
 
 ##### Where to find %.c ####################
-vpath %.c $(SRCDIR) $(SRCDIR)/scene $(SRCDIR)/parse $(SRCDIR)/utils
+vpath %.c $(SRCDIR) $(SRCDIR)/scene $(SRCDIR)/parse $(SRCDIR)/game $(SRCDIR)/utils
 
 ##### Rules ################################
 all : $(NAME)
 
 $(NAME): $(LIBS) $(OBJS)
-	$(CC) $(CFLAGS) $(OBJS) $(LIBS) -o $(NAME)
+	@echo "Linking $(NAME)..."
+	@$(CC) $(CFLAGS) $(OBJS) $(LIBS) $(LDFLAGS) -o $(NAME)
+	@echo "✓ $(NAME) compiled successfully"
 
 ##### Objects ##############################
 $(OBJDIR):
-	mkdir -p $(OBJDIR)
+	@mkdir -p $(OBJDIR)
 
 $(OBJDIR)/%.o: %.c | $(OBJDIR)
-	$(CC) $(CFLAGS) $(CPPFLAGS) $(INCLUDES) -c $< -o $@
+	@echo "Compiling $<..."
+	@$(CC) $(CFLAGS) $(CPPFLAGS) $(INCLUDES) -c $< -o $@
 
 ##### Libft ################################
 $(LIBFT):
-	$(MAKE) -C $(LIBFT_DIR)
+	@echo "Building libft..."
+	@$(MAKE) -C $(LIBFT_DIR) > /dev/null
 
 ##### Get Next Line ########################
 $(GNL):
-	$(MAKE) -C $(GNL_DIR)
+	@echo "Building get_next_line..."
+	@$(MAKE) -C $(GNL_DIR) > /dev/null
+
+##### Minilibx #############################
+$(MLX):
+	@echo "Building minilibx..."
+	@$(MAKE) -C $(MLX_DIR) > /dev/null 2>&1
 
 ##### Clean ################################
 clean:
-	rm -rf $(OBJDIR)
-	$(MAKE) -C $(LIBFT_DIR) clean
-	$(MAKE) -C $(GNL_DIR) clean
+	@echo "Cleaning object files..."
+	@rm -rf $(OBJDIR)
+	@$(MAKE) -C $(LIBFT_DIR) clean > /dev/null 2>&1
+	@$(MAKE) -C $(GNL_DIR) clean > /dev/null 2>&1
+	@$(MAKE) -C $(MLX_DIR) clean > /dev/null 2>&1
+	@echo "✓ Clean complete"
 
 fclean: clean
-	rm -f $(NAME)
-	$(MAKE) -C $(LIBFT_DIR) fclean
-	$(MAKE) -C $(GNL_DIR) fclean
+	@echo "Removing $(NAME)..."
+	@rm -f $(NAME)
+	@$(MAKE) -C $(LIBFT_DIR) fclean > /dev/null 2>&1
+	@$(MAKE) -C $(GNL_DIR) fclean > /dev/null 2>&1
+	@echo "✓ Full clean complete"
 
 re: fclean all
 

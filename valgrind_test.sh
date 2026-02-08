@@ -9,7 +9,7 @@ run_dir () {
   find "$DIR" -type f -name "*.cub" -print0 | sort -z | while IFS= read -r -d '' f; do
     echo "--- $f"
     valgrind --leak-check=full --show-leak-kinds=all --errors-for-leak-kinds=definite \
-      --error-exitcode=42 "$BIN" "$f" >/dev/null 2>&1
+      --error-exitcode=42 "$BIN" --test "$f" 2>&1 | grep -E "(definitely lost|ERROR SUMMARY)"
     if [[ $? -eq 42 ]]; then
       echo "[LEAK] $f"
     else

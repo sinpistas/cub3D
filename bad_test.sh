@@ -32,7 +32,7 @@ echo
 
 for f in "${FILES[@]}"; do
   ((TOTAL++))
-  "$BIN" "$f" > /dev/null 2>&1
+  "$BIN" --test "$f" > /dev/null 2>&1
   status=$?
 
   if [[ $status -eq 0 ]]; then
