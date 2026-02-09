@@ -6,7 +6,7 @@
 #    By: apestana <apestana@student.42malaga.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/02/05 11:05:33 by apestana          #+#    #+#              #
-#    Updated: 2026/02/07 19:55:37 by apestana         ###   ########.fr        #
+#    Updated: 2026/02/09 12:15:16 by apestana         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,6 +42,7 @@ SRC			= main.c \
 			  game/game_init.c game/load_textures.c game/render.c game/camera.c \
 			  game/raycast.c game/raycast_utils.c game/raycast_draw.c \
 			  game/events.c game/events_update.c game/movement.c game/rotation.c \
+			  game/movement_utils.c \
 			  utils/utils_free.c
 SRCS		= $(addprefix $(SRCDIR)/,$(SRC))
 
@@ -63,48 +64,48 @@ vpath %.c $(SRCDIR) $(SRCDIR)/scene $(SRCDIR)/parse $(SRCDIR)/game $(SRCDIR)/uti
 all : $(NAME)
 
 $(NAME): $(LIBS) $(OBJS)
-	@echo "Linking $(NAME)..."
-	@$(CC) $(CFLAGS) $(OBJS) $(LIBS) $(LDFLAGS) -o $(NAME)
-	@echo "✓ $(NAME) compiled successfully"
+	echo "Linking $(NAME)..."
+	$(CC) $(CFLAGS) $(OBJS) $(LIBS) $(LDFLAGS) -o $(NAME)
+	echo "✓ $(NAME) compiled successfully"
 
 ##### Objects ##############################
 $(OBJDIR):
-	@mkdir -p $(OBJDIR)
+	mkdir -p $(OBJDIR)
 
 $(OBJDIR)/%.o: %.c | $(OBJDIR)
-	@echo "Compiling $<..."
-	@$(CC) $(CFLAGS) $(CPPFLAGS) $(INCLUDES) -c $< -o $@
+	echo "Compiling $<..."
+	$(CC) $(CFLAGS) $(CPPFLAGS) $(INCLUDES) -c $< -o $@
 
 ##### Libft ################################
 $(LIBFT):
-	@echo "Building libft..."
-	@$(MAKE) -C $(LIBFT_DIR) > /dev/null
+	echo "Building libft..."
+	$(MAKE) -C $(LIBFT_DIR) > /dev/null
 
 ##### Get Next Line ########################
 $(GNL):
-	@echo "Building get_next_line..."
-	@$(MAKE) -C $(GNL_DIR) > /dev/null
+	echo "Building get_next_line..."
+	$(MAKE) -C $(GNL_DIR) > /dev/null
 
 ##### Minilibx #############################
 $(MLX):
-	@echo "Building minilibx..."
-	@$(MAKE) -C $(MLX_DIR) > /dev/null 2>&1
+	echo "Building minilibx..."
+	$(MAKE) -C $(MLX_DIR) > /dev/null 2>&1
 
 ##### Clean ################################
 clean:
-	@echo "Cleaning object files..."
-	@rm -rf $(OBJDIR)
-	@$(MAKE) -C $(LIBFT_DIR) clean > /dev/null 2>&1
-	@$(MAKE) -C $(GNL_DIR) clean > /dev/null 2>&1
-	@$(MAKE) -C $(MLX_DIR) clean > /dev/null 2>&1
-	@echo "✓ Clean complete"
+	echo "Cleaning object files..."
+	rm -rf $(OBJDIR)
+	$(MAKE) -C $(LIBFT_DIR) clean > /dev/null 2>&1
+	$(MAKE) -C $(GNL_DIR) clean > /dev/null 2>&1
+	$(MAKE) -C $(MLX_DIR) clean > /dev/null 2>&1
+	echo "✓ Clean complete"
 
 fclean: clean
-	@echo "Removing $(NAME)..."
-	@rm -f $(NAME)
-	@$(MAKE) -C $(LIBFT_DIR) fclean > /dev/null 2>&1
-	@$(MAKE) -C $(GNL_DIR) fclean > /dev/null 2>&1
-	@echo "✓ Full clean complete"
+	echo "Removing $(NAME)..."
+	rm -f $(NAME)
+	$(MAKE) -C $(LIBFT_DIR) fclean > /dev/null 2>&1
+	$(MAKE) -C $(GNL_DIR) fclean > /dev/null 2>&1
+	echo "✓ Full clean complete"
 
 re: fclean all
 
