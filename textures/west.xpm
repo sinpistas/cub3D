@@ -3,10 +3,10 @@ static char *stone_wall[] = {
 /* width height num_colors chars_per_pixel */
 "64 64 4 1",
 /* colors */
-"  c #1A1A1A", /* Sombras profundas */
-". c #404040", /* Piedra oscura */
-"X c #606060", /* Piedra base */
-"o c #808080", /* Piedra clara/aristas */
+"  c #1A1A1A",
+". c #404040",
+"X c #606060",
+"o c #808080", 
 /* pixels */
 "                                                                ",
 " ooooooXXXXXXX...  ooooooooooXXXXXXXX....  oooooooooooXXXXXXX.. ",
@@ -16,7 +16,8 @@ static char *stone_wall[] = {
 " oXXXXXXXXXXXXX..  oXXXXXXXXXXXXXXXXXX...  oXXXXXXXXXXXXXXXXX.. ",
 " oXXXXXXXXXXXXX..  oXXXXXXXXXXXXXXXXXX...  oXXXXXXXXXXXXXXXXX.. ",
 " oXXXXXXXXXXXXX..  oXXXXXXXXXXXXXXXXXX...  oXXXXXXXXXXXXXXXXX.. ",
-" ........  ......  ..................  ..  .................  . ",,
+" ........  ......  ..................  ..  .................  . ",
+"                                                                ",
 " oooooooooooooXXXXXXX....  oooooooooooooXXXXXXX....  oooooooooo ",
 " oXXXXXXXXXXXXXXXXXXX...  oXXXXXXXXXXXXXXXXXXXX...  oXXXXXXXXXX ",
 " oXXXXXXXXXXXXXXXXXXX...  oXXXXXXXXXXXXXXXXXXXX...  oXXXXXXXXXX ",
@@ -33,8 +34,7 @@ static char *stone_wall[] = {
 " oXXXXXXXXXXXXX..  oXXXXXXXXXXXXXXXXXX...  oXXXXXXXXXXXXXXXXX.. ",
 " oXXXXXXXXXXXXX..  oXXXXXXXXXXXXXXXXXX...  oXXXXXXXXXXXXXXXXX.. ",
 " oXXXXXXXXXXXXX..  oXXXXXXXXXXXXXXXXXX...  oXXXXXXXXXXXXXXXXX.. ",
-" oXXXXXXXXXXXXX..  oXXXXXXXXXXXXXXXXXX...  oXXXXXXXXXXXXXXXXX.. 
-"                                                                "",
+" oXXXXXXXXXXXXX..  oXXXXXXXXXXXXXXXXXX...  oXXXXXXXXXXXXXXXXX.. ",
 " oXXXXXXXXXXXXX..  oXXXXXXXXXXXXXXXXXX...  oXXXXXXXXXXXXXXXXX.. ",
 " ........  ......  ..................  ..  .................  . ",
 "                                                                ",

@@ -3,10 +3,10 @@ static char *wood_wall[] = {
 /* width height num_colors chars_per_pixel */
 "64 64 4 1",
 /* colors */
-"  c #3E2723", /* Grieta entre tablones */
-". c #5D4037", /* Madera oscura */
-"X c #795548", /* Madera base */
-"o c #8D6E63", /* Vetas claras */
+"  c #3E2723",
+". c #5D4037",
+"X c #795548",
+"o c #8D6E63",
 /* pixels */
 " XXXXXX.o  XXXXX.oo  XXXXXX.o  XXXXX.oo  XXXXXX.o  XXXXX.oo  XXX",
 " XXXXXX.o  XXXXX.oo  XXXXXX.o  XXXXX.oo  XXXXXX.o  XXXXX.oo  XXX",

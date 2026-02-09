@@ -3,10 +3,10 @@ static char *metal_wall[] = {
 /* width height num_colors chars_per_pixel */
 "64 64 4 1",
 /* colors */
-"  c #444444", /* Sombra/Hendidura */
-". c #777777", /* Metal base */
-"X c #AAAAAA", /* Metal claro */
-"o c #DDDDDD", /* Brillo/Reflejo */
+"  c #444444",
+". c #777777",
+"X c #AAAAAA",
+"o c #DDDDDD",
 /* pixels */
 " oooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo. ",
 " oX..........................................................X. ",
