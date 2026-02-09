@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   movement.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ancanale <antonioayr.94@gmail.com>         +#+  +:+       +#+        */
+/*   By: apestana <apestana@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/08 13:00:00 by ancanale          #+#    #+#             */
-/*   Updated: 2026/02/08 17:10:11 by ancanale         ###   ########.fr       */
+/*   Updated: 2026/02/09 12:13:44 by apestana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,14 @@ void	move_forward(t_game *game)
 {
 	double	new_x;
 	double	new_y;
+	int		ix;
+	int		iy;
 
 	new_x = game->cam.pos_x + game->cam.dir_x * MOVE_SPEED;
 	new_y = game->cam.pos_y + game->cam.dir_y * MOVE_SPEED;
-	if (is_walkable(game->scene.map[(int)new_y][(int)new_x]))
+	ix = (int)new_x;
+	iy = (int)new_y;
+	if (in_bounds(game, ix, iy) && is_walkable(game->scene.map[iy][ix]))
 	{
 		game->cam.pos_x = new_x;
 		game->cam.pos_y = new_y;
@@ -35,10 +39,15 @@ void	move_backward(t_game *game)
 {
 	double	new_x;
 	double	new_y;
+	int		ix;
+	int		iy;
 
 	new_x = game->cam.pos_x - game->cam.dir_x * MOVE_SPEED;
 	new_y = game->cam.pos_y - game->cam.dir_y * MOVE_SPEED;
-	if (is_walkable(game->scene.map[(int)new_y][(int)new_x]))
+	ix = (int)new_x;
+	iy = (int)new_y;
+	if (in_bounds(game, ix, iy)
+		&& is_walkable(game->scene.map[(int)new_y][(int)new_x]))
 	{
 		game->cam.pos_x = new_x;
 		game->cam.pos_y = new_y;
@@ -49,10 +58,15 @@ void	move_left(t_game *game)
 {
 	double	new_x;
 	double	new_y;
+	int		ix;
+	int		iy;
 
 	new_x = game->cam.pos_x - game->cam.plane_x * MOVE_SPEED;
 	new_y = game->cam.pos_y - game->cam.plane_y * MOVE_SPEED;
-	if (is_walkable(game->scene.map[(int)new_y][(int)new_x]))
+	ix = (int)new_x;
+	iy = (int)new_y;
+	if (in_bounds(game, ix, iy)
+		&& is_walkable(game->scene.map[(int)new_y][(int)new_x]))
 	{
 		game->cam.pos_x = new_x;
 		game->cam.pos_y = new_y;
@@ -63,10 +77,15 @@ void	move_right(t_game *game)
 {
 	double	new_x;
 	double	new_y;
+	int		ix;
+	int		iy;
 
 	new_x = game->cam.pos_x + game->cam.plane_x * MOVE_SPEED;
 	new_y = game->cam.pos_y + game->cam.plane_y * MOVE_SPEED;
-	if (is_walkable(game->scene.map[(int)new_y][(int)new_x]))
+	ix = (int)new_x;
+	iy = (int)new_y;
+	if (in_bounds(game, ix, iy)
+		&& is_walkable(game->scene.map[(int)new_y][(int)new_x]))
 	{
 		game->cam.pos_x = new_x;
 		game->cam.pos_y = new_y;
