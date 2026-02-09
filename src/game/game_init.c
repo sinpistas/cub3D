@@ -6,17 +6,23 @@
 /*   By: apestana <apestana@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/08 13:00:00 by ancanale          #+#    #+#             */
-/*   Updated: 2026/02/09 12:24:11 by apestana         ###   ########.fr       */
+/*   Updated: 2026/02/09 13:58:24 by apestana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
+/*
+** Convert RGB components to a packed 0xRRGGBB integer.
+*/
 int	rgb_to_int(t_rgb color)
 {
 	return ((color.r << 16) | (color.g << 8) | color.b);
 }
 
+/*
+** Initialize MLX context, create window and backbuffer image.
+*/
 static int	init_mlx(t_game *game)
 {
 	game->mlx = mlx_init();
@@ -35,6 +41,9 @@ static int	init_mlx(t_game *game)
 	return (0);
 }
 
+/*
+** Initialize game runtime from parsed scene (mlx, textures, camera, keys).
+*/
 int	game_init(t_game *game, t_scene *scene)
 {
 	ft_memset(game, 0, sizeof(t_game));
@@ -57,6 +66,9 @@ int	game_init(t_game *game, t_scene *scene)
 	return (0);
 }
 
+/*
+** Free MLX images/window/display allocated by the game.
+*/
 void	game_free(t_game *game)
 {
 	if (game->textures.north.img)

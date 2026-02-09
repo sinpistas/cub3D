@@ -6,12 +6,15 @@
 /*   By: apestana <apestana@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/08 13:00:00 by ancanale          #+#    #+#             */
-/*   Updated: 2026/02/09 13:11:19 by apestana         ###   ########.fr       */
+/*   Updated: 2026/02/09 13:58:23 by apestana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
+/*
+** Apply movement keys (WASD). Sets moved if the player position changed.
+*/
 void	handle_movement_keys(t_game *game, int *moved)
 {
 	double	old_x;
@@ -34,6 +37,9 @@ void	handle_movement_keys(t_game *game, int *moved)
 	}
 }
 
+/*
+** Apply rotation keys (left/right). Sets moved if the view changed.
+*/
 void	handle_rotation_keys(t_game *game, int *moved)
 {
 	double	old_dir_x;
@@ -58,6 +64,9 @@ void	handle_rotation_keys(t_game *game, int *moved)
 	}
 }
 
+/*
+** Main loop hook: update movement/rotation and re-render only when needed.
+*/
 int	update_game(t_game *game)
 {
 	int	moved;

@@ -3,15 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   events.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ancanale <antonioayr.94@gmail.com>         +#+  +:+       +#+        */
+/*   By: apestana <apestana@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/08 13:00:00 by ancanale          #+#    #+#             */
-/*   Updated: 2026/02/08 17:09:54 by ancanale         ###   ########.fr       */
+/*   Updated: 2026/02/09 13:58:24 by apestana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
+/*
+** Close window: free game resources and exit.
+*/
 int	handle_close(t_game *game)
 {
 	game_free(game);
@@ -20,6 +23,9 @@ int	handle_close(t_game *game)
 	return (0);
 }
 
+/*
+** Key press handler: set key state flags for smooth movement.
+*/
 int	handle_keypress(int keycode, t_game *game)
 {
 	if (keycode == KEY_ESC)
@@ -39,6 +45,9 @@ int	handle_keypress(int keycode, t_game *game)
 	return (0);
 }
 
+/*
+** Key release handler: unset key state flags.
+*/
 int	handle_keyrelease(int keycode, t_game *game)
 {
 	if (keycode == KEY_W)

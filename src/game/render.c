@@ -3,15 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ancanale <antonioayr.94@gmail.com>         +#+  +:+       +#+        */
+/*   By: apestana <apestana@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/08 13:00:00 by ancanale          #+#    #+#             */
-/*   Updated: 2026/02/08 17:10:19 by ancanale         ###   ########.fr       */
+/*   Updated: 2026/02/09 13:58:29 by apestana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
+/*
+** Render a full frame by raycasting into the backbuffer and blitting it.
+*/
 void	render_frame(t_game *game)
 {
 	raycast(game);

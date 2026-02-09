@@ -3,15 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   rotation.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ancanale <antonioayr.94@gmail.com>         +#+  +:+       +#+        */
+/*   By: apestana <apestana@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/08 13:00:00 by ancanale          #+#    #+#             */
-/*   Updated: 2026/02/08 17:10:21 by ancanale         ###   ########.fr       */
+/*   Updated: 2026/02/09 13:58:29 by apestana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
+/*
+** Rotate view to the left by ROT_SPEED (direction and camera plane).
+*/
 void	rotate_left(t_game *game)
 {
 	double	old_dir_x;
@@ -29,6 +32,9 @@ void	rotate_left(t_game *game)
 		+ game->cam.plane_y * cos(-ROT_SPEED);
 }
 
+/*
+** Rotate view to the right by ROT_SPEED (direction and camera plane).
+*/
 void	rotate_right(t_game *game)
 {
 	double	old_dir_x;

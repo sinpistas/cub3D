@@ -6,12 +6,15 @@
 /*   By: apestana <apestana@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/08 13:00:00 by ancanale          #+#    #+#             */
-/*   Updated: 2026/02/09 13:09:42 by apestana         ###   ########.fr       */
+/*   Updated: 2026/02/09 13:58:28 by apestana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
+/*
+** Initialize ray direction and delta distances for a given screen column.
+*/
 void	init_ray(t_game *game, t_ray *ray, int x)
 {
 	ray->camera_x = 2 * x / (double)WIN_WIDTH - 1;
@@ -30,6 +33,9 @@ void	init_ray(t_game *game, t_ray *ray, int x)
 	ray->hit = 0;
 }
 
+/*
+** Compute step direction and initial side distances for DDA traversal.
+*/
 void	set_step(t_game *game, t_ray *ray)
 {
 	if (ray->ray_dir_x < 0)
@@ -58,6 +64,9 @@ void	set_step(t_game *game, t_ray *ray)
 	}
 }
 
+/*
+** Compute perpendicular wall distance and projected wall slice limits.
+*/
 void	calc_wall_height(t_game *game, t_ray *ray)
 {
 	if (ray->side == 0)
@@ -83,6 +92,9 @@ void	calc_wall_height(t_game *game, t_ray *ray)
 		ray->draw_end = WIN_HEIGHT - 1;
 }
 
+/*
+** Compute texture X coordinate and vertical sampling step for wall slice.
+*/
 void	calc_texture_x(t_game *game, t_ray *ray, t_img *texture)
 {
 	if (ray->side == 0)
@@ -102,6 +114,9 @@ void	calc_texture_x(t_game *game, t_ray *ray, t_img *texture)
 			+ ray->line_height / 2) * ray->step;
 }
 
+/*
+** Perform DDA to find the first wall hit along the ray.
+*/
 void	perform_dda(t_game *game, t_ray *ray)
 {
 	int	guard;

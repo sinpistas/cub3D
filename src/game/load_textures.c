@@ -3,15 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   load_textures.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ancanale <antonioayr.94@gmail.com>         +#+  +:+       +#+        */
+/*   By: apestana <apestana@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/08 13:11:35 by ancanale          #+#    #+#             */
-/*   Updated: 2026/02/08 17:11:51 by ancanale         ###   ########.fr       */
+/*   Updated: 2026/02/09 13:58:25 by apestana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
+/*
+** Load an XPM file into an MLX image and fetch its pixel buffer.
+*/
 static int	load_texture_img(t_game *game, t_img *img, char *path)
 {
 	img->img = mlx_xpm_file_to_image(game->mlx, path,
@@ -26,6 +29,9 @@ static int	load_texture_img(t_game *game, t_img *img, char *path)
 	return (0);
 }
 
+/*
+** Load all scene textures (NO/SO/EA/WE) into MLX images.
+*/
 int	load_textures(t_game *game)
 {
 	if (load_texture_img(game, &game->textures.north,

@@ -3,15 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   raycast_draw.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ancanale <antonioayr.94@gmail.com>         +#+  +:+       +#+        */
+/*   By: apestana <apestana@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/08 13:00:00 by ancanale          #+#    #+#             */
-/*   Updated: 2026/02/08 17:10:12 by ancanale         ###   ########.fr       */
+/*   Updated: 2026/02/09 13:58:27 by apestana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
+/*
+** Put one pixel into the frame image, with bounds checks.
+*/
 void	put_pixel(t_img *img, int x, int y, int color)
 {
 	char	*dst;
@@ -23,6 +26,9 @@ void	put_pixel(t_img *img, int x, int y, int color)
 	}
 }
 
+/*
+** Read one pixel color from a texture image, with bounds checks.
+*/
 int	get_texture_color(t_img *texture, int x, int y)
 {
 	char	*pixel;
@@ -36,6 +42,9 @@ int	get_texture_color(t_img *texture, int x, int y)
 	return (0);
 }
 
+/*
+** Select the wall texture depending on ray side and direction.
+*/
 t_img	*get_texture(t_game *game, t_ray *ray)
 {
 	if (ray->side == 0)
@@ -54,6 +63,9 @@ t_img	*get_texture(t_game *game, t_ray *ray)
 	}
 }
 
+/*
+** Draw one vertical screen column: ceiling, textured wall, and floor.
+*/
 void	draw_vertical_line(t_game *game, int x, t_ray *ray)
 {
 	t_img	*texture;
